@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ============================================================================
+   student-view.fxml  -  the STRUCTURE of the window, written in XML
+  ============================================================================
+   Each XML tag = one JavaFX object. Nesting tags = putting nodes inside others.
+   This file IS the scene graph:
+
+       VBox (root)
+         +- Label      (title)
+         +- HBox       (form)
+         |    +- TextField (name)
+         |    +- TextField (grade)
+         |    +- Button    (Add)
+         +- ListView   (students)
+         +- Button     (Remove)
+         +- Label      (statistics)
+         +- Label      (messages)
+
+   Java code (version 1)                      FXML (this version)
+   =======================================   ==========================================
+   Label t = new Label("Hi");               <Label text="Hi"/>
+   field.setPromptText("Name");             <TextField promptText="Name"/>
+   field.setPrefWidth(110);                 <TextField prefWidth="110"/>
+   new HBox(10, a, b, c);                   <HBox spacing="10"> a b c </HBox>
+   button.setOnAction(e -> handleAdd());    <Button onAction="#handleAdd"/>
+   private TextField nameField = ...;       <TextField fx:id="nameField"/>
+
+   Special attributes:
+     fx:controller="..."  -> the Java class that handles the events
+     fx:id="..."          -> the name of the matching @FXML field in the controller
+     onAction="#..."      -> the controller method to call on click / ENTER
+     styleClass="..."     -> a CSS class (like class="..." in HTML)
+     stylesheets="@..."   -> the CSS file to use (@ = path relative to this file)
+
+   TIP: this file can be opened and edited by drag & drop in Scene Builder
+        (https://gluonhq.com/products/scene-builder/).
+-->
+
+<!-- "import" tells FXMLLoader in which Java package each tag lives. -->
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="studentapp.StudentController"
+      stylesheets="@style.css"
+      styleClass="root-pane"
+      spacing="12">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Student Grade Manager" styleClass="title"/>
+    <Label text="Built with FXML + CSS" styleClass="subtitle"/>
+
+    <!-- The form: 3 elements side by side -->
+    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="form">
+        <TextField fx:id="nameField"  promptText="Student name" HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="gradeField" promptText="Grade (0 - 20)" prefWidth="120"
+                   onAction="#handleAdd"/>  <!-- ENTER in the grade field also adds -->
+        <Button text="Add" onAction="#handleAdd" styleClass="primary-button"/>
+    </HBox>
+
+    <!-- VBox.vgrow="ALWAYS": the list takes all the remaining vertical space -->
+    <ListView fx:id="studentList" VBox.vgrow="ALWAYS">
+        <placeholder>
+            <Label text="No students yet. Add one above!" styleClass="placeholder"/>
+        </placeholder>
+    </ListView>
+
+    <Button text="Remove selected" onAction="#handleRemove" styleClass="danger-button"/>
+
+    <Label fx:id="statsLabel" styleClass="stats"/>
+    <Label fx:id="messageLabel" styleClass="message"/>
+</VBox>

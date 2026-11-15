@@ -1,0 +1,132 @@
+/*
+ * ============================================================================
+ *  style.css  -  how the window LOOKS
+ * ============================================================================
+ *  JavaFX CSS works like web CSS, with two differences:
+ *   - property names start with "-fx-"   (color -> -fx-text-fill, etc.)
+ *   - selectors use JavaFX names:
+ *        .button, .text-field, .list-view, .label   -> every control of that type
+ *        .title, .error ...                          -> our own styleClass="..."
+ *        #nameField                                  -> one node, by its fx:id
+ *        :hover, :focused, :selected                 -> states (pseudo-classes)
+ *
+ *  Change a color here, re-run the app: no Java code to touch.
+ */
+
+/* ---------- Color variables (JavaFX "looked-up colors") ---------- */
+.root {
+    -primary: #2e6cdf;
+    -primary-dark: #1f4fa8;
+    -danger: #c0392b;
+    -success: #27ae60;
+    -text: #2c3e50;
+    -muted: #7f8c8d;
+
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* ---------- The whole window ---------- */
+.root-pane {
+    -fx-background-color: linear-gradient(to bottom, #f4f7fb, #e6ecf5);
+}
+
+/* ---------- Titles ---------- */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text;
+}
+
+.subtitle {
+    -fx-text-fill: -muted;
+    -fx-font-style: italic;
+    -fx-padding: -8 0 4 0;   /* pull it closer to the title */
+}
+
+/* ---------- Text fields ---------- */
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-border-color: #cfd8e3;
+    -fx-border-radius: 6;
+    -fx-padding: 7 10;
+}
+
+.text-field:focused {
+    -fx-border-color: -primary;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+    -fx-background-radius: 6;
+    -fx-padding: 7 16;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.primary-button {
+    -fx-background-color: -primary;
+}
+
+.primary-button:hover {
+    -fx-background-color: -primary-dark;
+}
+
+.danger-button {
+    -fx-background-color: -danger;
+}
+
+.danger-button:hover {
+    -fx-background-color: derive(-danger, -20%);   /* derive() = darker / lighter */
+}
+
+.button:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+/* ---------- The list ---------- */
+.list-view {
+    -fx-background-radius: 8;
+    -fx-border-color: #cfd8e3;
+    -fx-border-radius: 8;
+}
+
+.list-cell {
+    -fx-padding: 8 10;
+    -fx-text-fill: -text;
+}
+
+.list-cell:odd {
+    -fx-background-color: #f8fafd;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #e3ecfb;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+}
+
+.placeholder {
+    -fx-text-fill: -muted;
+}
+
+/* ---------- Statistics and messages ---------- */
+.stats {
+    -fx-font-weight: bold;
+    -fx-text-fill: -text;
+}
+
+/* The controller switches between these two classes (see showMessage()). */
+.message.error {
+    -fx-text-fill: -danger;
+}
+
+.message.success {
+    -fx-text-fill: -success;
+}

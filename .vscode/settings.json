@@ -1,0 +1,12 @@
+{
+    // Java now comes from the global VS Code settings (Temurin JDK 21 installed system-wide).
+    // Previously this folder pointed to Eclipse's bundled Java in ~/.p2/pool/plugins/... which
+    // could disappear when Eclipse updates.
+
+    // Import this Gradle project with the classic importer (Buildship) instead of the
+    // "Gradle Build Server". The Build Server does not put the JavaFX jars on the MODULE PATH,
+    // so with our module-info.java ("requires javafx.controls") the editor showed
+    // "javafx.controls cannot be resolved to a module" and every JavaFX type was unresolved.
+    // Gradle itself (gradle run / build) was never affected.
+    "java.gradle.buildServer.enabled": "off"
+}

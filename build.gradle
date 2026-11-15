@@ -1,0 +1,29 @@
+// build.gradle = the Gradle configuration file (same job as Maven's pom.xml).
+// Since Java 11, JavaFX is NOT included in the JDK anymore (Swing still is),
+// so we ask Gradle to download it for us.
+
+plugins {
+    id 'application'                                   // gives us the "run" task
+    id 'org.openjfx.javafxplugin' version '0.1.0'      // makes JavaFX setup easy
+}
+
+repositories {
+    mavenCentral()                                     // where libraries are downloaded from
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+    options.encoding = 'UTF-8'
+}
+
+javafx {
+    version = '21.0.5'
+    // javafx.controls -> buttons, labels, text fields, lists...
+    // javafx.fxml     -> NEW in this version: lets us describe the UI in an .fxml (XML) file
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+application {
+    mainModule = 'studentapp'                          // name in module-info.java
+    mainClass = 'studentapp.StudentApp'                // the class with main()
+}
